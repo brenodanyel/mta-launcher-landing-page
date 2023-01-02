@@ -39,7 +39,7 @@ export default function Header() {
             </Typography>
 
             <Box sx={{ ml: 'auto' }}>
-              <Link href='https://app-mta-launcher.vercel.app/' color="inherit" underline='hover'>
+              <Link href='https://app.mta-launcher.com/' color="inherit" underline='hover'>
                 <Button variant="text" color="inherit" startIcon={<Icon>login</Icon>}>
                   Go to management panel
                 </Button>
