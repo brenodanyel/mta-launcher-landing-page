@@ -46,16 +46,14 @@ export default function Home(props: HomeProps) {
 }
 
 export const getStaticProps: GetStaticProps = async () => {
-  const download = await getDownloadInfo();
-
-  // const download = {
-  //   statistics: 3,
-  //   latest: {
-  //     url: 'https://github.com/MTALauncher/Releases/releases/download/0.0.2/MTALauncher_0.0.2_x64_en-US.msi',
-  //     version: '0.0.2',
-  //     size: '3.9 MB',
-  //   }
-  // };
+  const download = await getDownloadInfo() || {
+    statistics: 3,
+    latest: {
+      url: 'https://github.com/MTALauncher/Releases/releases/download/0.0.5/MTALauncher_0.0.5_x64_en-US.msi',
+      version: '0.0.5',
+      size: '3.9 MB',
+    }
+  };
 
   return {
     props: {
