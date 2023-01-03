@@ -41,7 +41,7 @@ export default function Header() {
             <Box sx={{ ml: 'auto' }}>
               <Link href='https://app.mta-launcher.com/' color="inherit" underline='hover'>
                 <Button variant="text" color="inherit" startIcon={<Icon>login</Icon>}>
-                  Go to management panel
+                  management panel
                 </Button>
               </Link>
             </Box>
