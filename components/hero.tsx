@@ -1,4 +1,4 @@
-import { Box, Button, Container, Icon, Link, Stack, Typography } from '@mui/material';
+import { Box, Button, Container, Icon, Link, Paper, Stack, Typography } from '@mui/material';
 import Carousel from './carousel';
 
 type HeroProps = {
@@ -37,7 +37,16 @@ export default function Hero(props: HeroProps) {
       </Box>
       <Container maxWidth="md" sx={{ zIndex: 1 }}>
         <Stack spacing="1em">
-          <Carousel />
+          <Paper
+            elevation={0}
+            variant="outlined"
+            sx={{
+              padding: '1em',
+              overflow: 'hidden',
+            }}
+          >
+            <Carousel />
+          </Paper>
           {download && (
             <Stack sx={{ alignItems: 'center' }} spacing="0.5em">
               <Typography variant="caption" textAlign="center" noWrap>Number of downloads: {Intl.NumberFormat().format(download.statistics)}</Typography>

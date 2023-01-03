@@ -18,7 +18,7 @@ const items: Item[] = [
   },
   {
     name: "Better way to find servers",
-    description: "Server owners can add a custom icon for their servers and add a badge with server profile.",
+    description: "Server owners can add a custom icon for their servers and add a badge with server profile. This allows for a more personalized and unique experience for members of the server, making it feel like their own special community.",
     image: '/carousel/2.png',
   },
   {
@@ -28,7 +28,7 @@ const items: Item[] = [
   },
   {
     name: "Discord Rich Presence",
-    description: "You can let your friends know what you're playing on Discord!",
+    description: "You can let your friends know what you're playing! Additionally, you can also share your in-game status with your friends, making it easier to connect and play together.",
     image: '/carousel/4.png',
   },
 ];
@@ -37,35 +37,27 @@ function Item(props: { item: Item; }) {
   const { item } = props;
 
   return (
-    <Paper
-      elevation={0}
-      variant="outlined"
-      sx={{
-        padding: '1em',
-        overflow: 'hidden',
-      }}
-    >
-      <Stack spacing="1em">
-        <Stack>
-          <Typography variant="h4" noWrap>{item.name}</Typography>
-          {item.description}
-        </Stack>
-        <Box
-          sx={{
-            position: 'relative',
-            height: '50vh',
-          }}
-        >
-          <Image
-            src={item.image}
-            alt={item.name}
-            fill
-            style={{ objectFit: 'contain' }}
-            sizes="100vw"
-          />
-        </Box>
+
+    <Stack spacing="1em">
+      <Stack>
+        <Typography variant="h4" noWrap>{item.name}</Typography>
+        {item.description}
       </Stack>
-    </Paper>
+      <Box
+        sx={{
+          position: 'relative',
+          height: '50vh',
+        }}
+      >
+        <Image
+          src={item.image}
+          alt={item.name}
+          fill
+          style={{ objectFit: 'contain' }}
+          sizes="100vw"
+        />
+      </Box>
+    </Stack>
   );
 }
 
