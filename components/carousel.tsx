@@ -1,8 +1,9 @@
 import React from 'react';
-import MUICarousel from 'react-material-ui-carousel';
-import { Paper, Button, Box, Stack } from '@mui/material';
+import { Box, Stack } from '@mui/material';
 import { Typography } from '@mui/material';
 import Image from 'next/image';
+import { Carousel as ReactCarousel } from 'react-responsive-carousel';
+import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
 
 type Item = {
   name: string;
@@ -63,14 +64,15 @@ function Item(props: { item: Item; }) {
 
 export default function Carousel() {
   return (
-    <MUICarousel
-      animation="slide"
-      navButtonsAlwaysVisible
-      interval={5000}
+    <ReactCarousel
+      autoPlay
+      infiniteLoop
+      useKeyboardArrows
+      showThumbs={false}
     >
       {items.map((item, i) => (
         <Item key={item.name} item={item} />
       ))}
-    </MUICarousel>
+    </ReactCarousel>
   );
 }
