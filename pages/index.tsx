@@ -49,9 +49,9 @@ export const getStaticProps: GetStaticProps = async () => {
   const download = await getDownloadInfo() || {
     statistics: 108,
     latest: {
-      url: 'https://github.com/MTALauncher/Releases/releases/download/0.0.5/MTALauncher_0.0.5_x64_en-US.msi',
-      version: '0.0.5',
-      size: '3.9 MB',
+      url: 'https://github.com/MTALauncher/Releases/releases/download/0.0.6/MTALauncher_0.0.6_x64_en-US.msi',
+      version: '0.0.6',
+      size: '5.3 MB',
     }
   };
 
@@ -59,6 +59,6 @@ export const getStaticProps: GetStaticProps = async () => {
     props: {
       download,
     },
-    revalidate: 60,
+    revalidate: 180,
   };
 };
