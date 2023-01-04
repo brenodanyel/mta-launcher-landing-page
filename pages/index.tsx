@@ -4,6 +4,7 @@ import { Stack } from '@mui/material';
 import Header from '../components/header';
 import Hero from '../components/hero';
 import Footer from '../components/footer';
+import HelpIcon from '../components/help-icon';
 import { getDownloadInfo } from '../services/download-info';
 
 type HomeProps = {
@@ -41,6 +42,7 @@ export default function Home(props: HomeProps) {
           <Footer />
         </Stack>
       </Stack>
+      <HelpIcon />
     </>
   );
 }
