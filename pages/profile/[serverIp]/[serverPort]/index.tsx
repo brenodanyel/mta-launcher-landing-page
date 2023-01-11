@@ -2,6 +2,7 @@ import { Box, Button, Link, Paper, Icon, Stack, Typography, Container } from "@m
 import { GetStaticProps } from 'next';
 import { getServer, getServerProfile } from '../../../../services';
 import MuiMarkdown from "mui-markdown";
+import removeMd from "remove-markdown";
 import Image from 'next/image';
 import Head from 'next/head';
 
@@ -70,7 +71,8 @@ export default function ServerProfile(props: ServerProfileProps) {
         <title>{server.name}</title>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta property="og:title" content={server.name} />
-        <meta property="og:description" content="Custom launcher for MTA (Multi Theft Auto)" />
+        <meta property="og:description" content={removeMd(profile.description)} />
+        <meta property="og:image" content={profile.logo} />
         <link rel="icon" href={profile.logo} />
       </Head>
       <Container
