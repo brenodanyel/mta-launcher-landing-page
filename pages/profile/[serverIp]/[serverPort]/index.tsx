@@ -72,8 +72,8 @@ export default function ServerProfile(props: ServerProfileProps) {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta property="og:title" content={server.name} />
         <meta property="og:description" content={removeMd(profile.description)} />
-        <meta property="og:image" content={profile.logo} />
-        <link rel="icon" href={profile.logo} />
+        <meta property="og:image" content={profile.logo || 'https://mtasa-launcher.s3.amazonaws.com/mta-logo.png'} />
+        <link rel="icon" href={profile.logo || 'https://mtasa-launcher.s3.amazonaws.com/mta-logo.png'} />
       </Head>
       <Container
         maxWidth="lg"
