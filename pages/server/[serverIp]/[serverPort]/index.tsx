@@ -107,7 +107,7 @@ export default function ServerProfile(props: ServerProfileProps) {
               }}
             >
               <Box>
-                <Typography variant='h6'>{decodeURIComponent(escape(server.name))}</Typography>
+                <Typography variant='h6'>{server.name}</Typography>
                 <Typography variant='caption'>
                   mtasa://{profile.ip}:{profile.port}
                 </Typography>
