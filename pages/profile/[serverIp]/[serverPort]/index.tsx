@@ -81,7 +81,7 @@ export default function ServerProfile(props: ServerProfileProps) {
           <title>{server.name}</title>
           <meta name="viewport" content="width=device-width, initial-scale=1" />
           <meta property="og:title" content={server.name} />
-          <meta property="og:description" content={removeMd(profile.description).slice(1, 200) + '...'} />
+          <meta property="og:description" content={removeMd(profile.description).slice(0, 200) + '...'} />
           <meta property="og:image" content={profile.logo || 'https://mtasa-launcher.s3.amazonaws.com/mta-logo.png'} />
           <link rel="icon" href={profile.logo || 'https://mtasa-launcher.s3.amazonaws.com/mta-logo.png'} />
         </Head>
