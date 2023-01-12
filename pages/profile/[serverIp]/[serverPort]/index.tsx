@@ -1,10 +1,10 @@
-import { Box, Button, Link, Paper, Icon, Stack, Typography, Container } from "@mui/material";
+import { Box, Container } from "@mui/material";
 import { GetStaticProps } from 'next';
 import { getServer, getServerProfile } from '../../../../services';
-import MuiMarkdown from "mui-markdown";
 import removeMd from "remove-markdown";
-import Image from 'next/image';
 import Head from 'next/head';
+import Header from '../../../../components/header';
+import ServerProfile from '../../../../components/server-profile';
 
 export type Profile = {
   id: string;
@@ -54,7 +54,7 @@ type ServerProfileProps = {
   server: Server;
 };
 
-export default function ServerProfile(props: ServerProfileProps) {
+export default function ServerProfilePage(props: ServerProfileProps) {
   const { profile, server } = props;
 
   if (!server) {
@@ -66,184 +66,45 @@ export default function ServerProfile(props: ServerProfileProps) {
   }
 
   return (
-    <Box
-      sx={{
-        background: 'url(/background.png) no-repeat center center ',
-        backgroundSize: 'cover',
-      }}
-    >
+    <>
+      <Head>
+        <title>{server.name}</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta property="og:title" content={server.name} />
+        <meta property="og:description" content={removeMd(profile.description).slice(0, 200) + '...'} />
+        <meta property="og:image" content={profile.logo || 'https://mtasa-launcher.s3.amazonaws.com/mta-logo.png'} />
+        <link rel="icon" href={profile.logo || 'https://mtasa-launcher.s3.amazonaws.com/mta-logo.png'} />
+      </Head>
       <Box
         sx={{
-          background: 'radial-gradient(circle, rgba(2,0,36,0) 0%, rgba(0,0,0,0.5) 95%, rgba(0,0,0,1) 100%)'
+          background: 'url(/background.png) no-repeat center center ',
+          backgroundSize: 'cover',
         }}
       >
-        <Head>
-          <title>{server.name}</title>
-          <meta name="viewport" content="width=device-width, initial-scale=1" />
-          <meta property="og:title" content={server.name} />
-          <meta property="og:description" content={removeMd(profile.description).slice(0, 200) + '...'} />
-          <meta property="og:image" content={profile.logo || 'https://mtasa-launcher.s3.amazonaws.com/mta-logo.png'} />
-          <link rel="icon" href={profile.logo || 'https://mtasa-launcher.s3.amazonaws.com/mta-logo.png'} />
-        </Head>
-        <Container
-          maxWidth="lg"
+        <Box
           sx={{
+            background: 'radial-gradient(circle, rgba(0,0,0,0) 0%, rgba(0,0,0,1) 85%, rgba(0,0,0,1) 100%)',
+            display: 'flex',
+            flexDirection: 'column',
             height: '100vh',
-            padding: '1em',
+            overflow: 'hidden'
           }}
         >
-          <Paper
+          <Header />
+
+          <Container
+            maxWidth="lg"
             sx={{
-              padding: '1.5em',
-              display: 'flex',
-              flexDirection: 'column',
-              overflow: 'hidden',
-              height: '100%',
-              gap: '1em',
+              padding: '1em',
+              flexGrow: 1,
+              overflow: 'auto',
             }}
-            elevation={0}
-            variant="outlined"
           >
-            <Box
-              sx={{
-                display: 'flex',
-                flexWrap: 'wrap',
-                justifyContent: 'space-between',
-              }}
-            >
-              <Box
-                sx={{
-                  display: 'flex',
-                  flexDirection: 'column',
-                  gap: '0.5em',
-                }}
-              >
-                <Box>
-                  <Typography variant='h6'>{server.name}</Typography>
-                  <Typography variant='caption'>
-                    mtasa://{profile.ip}:{profile.port}
-                  </Typography>
-                </Box>
-                <Box
-                  sx={{
-                    display: 'flex',
-                    gap: '0.5em',
-                  }}
-                >
-                  {profile.externalLinks.map((link) => (
-                    <Link key={link.id} href={link.url} target="_blank" rel='noreferrer' underline='hover'>
-                      <Button
-                        variant="outlined"
-                        size="small"
-                        startIcon={<Icon>reply</Icon>}
-                      >
-                        {link.name}
-                      </Button>
-                    </Link>
-                  ))}
-                </Box>
-              </Box>
-              <Box
-                sx={{
-                  width: '128px',
-                  height: '128px',
-                  display: 'flex',
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                  padding: '0.5em',
-                  overflow: 'hidden',
-                }}
-              >
-                <Image
-                  src={
-                    profile.logo
-                      ? profile.logo
-                      : 'https://mtasa-launcher.s3.amazonaws.com/mta-logo.png'
-                  }
-                  onError={({ currentTarget }) => {
-                    if (currentTarget.src === "https://mtasa-launcher.s3.amazonaws.com/mta-logo.png") {
-                      return;
-                    }
-                    currentTarget.src = "https://mtasa-launcher.s3.amazonaws.com/mta-logo.png";
-                  }}
-                  alt="Logo"
-                  width="128"
-                  height="128"
-                  style={{
-                    objectFit: 'cover',
-                    borderRadius: '10px',
-                  }}
-                />
-              </Box>
-            </Box>
-            <Paper
-              sx={{
-                overflow: 'hidden',
-                padding: '0.5em',
-                flexGrow: 1,
-              }}
-              elevation={0}
-              variant="outlined"
-            >
-              <Box sx={{
-                height: '100%',
-                padding: '0.5em',
-                overflow: 'auto',
-              }}>
-                <MuiMarkdown
-                  options={{
-                    overrides: {
-                      iframe: { component: 'div', props: { hidden: true } },
-                      a: { component: Link, props: { href: null } },
-                      h1: {
-                        component: Typography,
-                        props: { variant: 'h1', fontSize: '2.5em' },
-                      },
-                      h2: {
-                        component: Typography,
-                        props: { variant: 'h2', fontSize: '2em' },
-                      },
-                      h3: {
-                        component: Typography,
-                        props: { variant: 'h3', fontSize: '1.75em' },
-                      },
-                      h4: {
-                        component: Typography,
-                        props: { variant: 'h4', fontSize: '1.5em' },
-                      },
-                      h5: {
-                        component: Typography,
-                        props: { variant: 'h5', fontSize: '1.25em' },
-                      },
-                      h6: {
-                        component: Typography,
-                        props: { variant: 'h6', fontSize: '1em' },
-                      },
-                    },
-                  }}
-                >
-                  {profile.description}
-                </MuiMarkdown>
-              </Box>
-            </Paper>
-            <Box
-              sx={{
-                mt: 'auto',
-                display: "flex",
-                justifyContent: "flex-end",
-                gap: "0.5em",
-              }}
-            >
-              <Link href={`mtasa://${server.ip}:${server.port}`} underline="none">
-                <Button variant="contained" color="primary">
-                  Play
-                </Button>
-              </Link>
-            </Box>
-          </Paper>
-        </Container>
+            <ServerProfile server={server} profile={profile} />
+          </Container>
+        </Box>
       </Box>
-    </Box>
+    </>
   );
 }
 

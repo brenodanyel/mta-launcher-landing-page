@@ -8,12 +8,13 @@ import {
   Link,
   Icon,
 } from '@mui/material';
+import NextLink from 'next/link';
 
 export const pages = [];
 
 export default function Header() {
   return (
-    <AppBar position='sticky' sx={{ backgroundColor: 'black', borderBottom: 1, borderBottomColor: 'divider' }}>
+    <AppBar position='static' sx={{ backgroundColor: 'black', borderBottom: 1, borderBottomColor: 'divider' }}>
       <Container maxWidth='xl'>
         <Toolbar disableGutters>
           <Box
@@ -24,7 +25,11 @@ export default function Header() {
               justifyContent: { xs: 'center', md: 'flex-start' },
             }}
           >
-            <Typography
+            <Link
+              component={NextLink}
+              color="inherit"
+              underline='none'
+              href='/'
               variant='h6'
               noWrap
               sx={{
@@ -36,7 +41,7 @@ export default function Header() {
               }}
             >
               MTA Launcher
-            </Typography>
+            </Link>
 
             <Box sx={{ ml: 'auto' }}>
               <Link href='https://app.mta-launcher.com/' color="inherit" underline='hover'>
